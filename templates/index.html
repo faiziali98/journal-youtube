@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Sample Application</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <form action="/" method="post">
+        <label for="baby_name">Baby's Name:</label>
+        <input type="text" id="baby_name" name="baby_name" required>
+        <br>
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required>
+        <br>
+        <button type="submit">Start Journaling</button>
+    </form>
+</body>
+</html>

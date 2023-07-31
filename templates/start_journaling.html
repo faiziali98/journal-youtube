@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Journaling</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Start Journaling for {{ baby_name }}</h1>
+    <p>Start Date: {{ start_date }}</p>
+    <hr>
+    <h2>Add New Entry</h2>
+    <form action="/start_journaling?baby_name={{ baby_name }}&start_date={{ start_date }}" method="post">
+        <label for="events">Events:</label>
+        <select id="events" name="events">
+            <option value="Feed">Feed</option>
+            <option value="Diaper">Diaper</option>
+            <option value="Sleep">Sleep</option>
+        </select>
+        <br>
+        <label for="time">Time:</label>
+        <select id="time" name="time">
+            {% for hour in range(0, 24) %}
+                {% for minute in range(0, 60, 15) %}
+                    <option value="{{ '%02d:%02d' % (hour, minute) }}">{{ '%02d:%02d' % (hour, minute) }}</option>
+                {% endfor %}
+            {% endfor %}
+        </select>
+        <br>
+        <label for="amount">Amount:</label>
+        <select id="amount" name="amount">
+            {% for value in range(0, 21) %}
+                <option value="{{ value / 2 }}">{{ value / 2 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Add Entry</button>
+    </form>
+    <hr>
+    <h2>Journal Entries</h2>
+    <ul>
+        {% for entry in journal_entries %}
+        <li>
+            <strong>Date:</strong> {{ start_date }}<br>
+            <strong>Event:</strong> {{ entry.events }}<br>
+            <strong>Time:</strong> {{ entry.time }}<br>
+            <strong>Amount:</strong> {{ entry.amount }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
